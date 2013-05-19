@@ -1,5 +1,5 @@
 module Rack
-  module Nojs
+  class Nojs
     VERSION = "0.0.1"
   end
 end
