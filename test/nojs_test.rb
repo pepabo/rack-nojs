@@ -35,5 +35,33 @@ class NojsTest < Test::Unit::TestCase
   def test_castanet_with_mobile
     get '/', {}, {'HTTP_USER_AGENT' => 'DoCoMo/2.0 P903i'}
     assert !last_response.body.include?("castanet")
+    assert last_response.body.include? "<body></body>"
+  end
+end
+
+class TestAppReal
+  def call(env)
+    [
+      200,
+      { 'Content-Type' => 'text/html' },
+      ["<html>", "<head>", "</head>", "<body>", '<script type="text/javascript" src="//castanet.kiban.paperboy.co.jp/castanet.js"></script>', "<div>", "</div>", "<script type=\"text/javascript\">\nCastanet.setService('foo');\nCastanet.dispatchPageRequest();\n</script>", "</body>", "</html>"]
+    ]
+  end
+end
+
+class NojsTestReal < Test::Unit::TestCase
+  def app
+    Rack::Builder.new {
+      map "/" do
+        use ::Rack::Nojs
+        run TestAppReal.new
+      end
+    }.to_app
+  end
+
+  def test_castanet_with_mobile
+    get '/', {}, {'HTTP_USER_AGENT' => 'DoCoMo/2.0 P903i'}
+    assert !last_response.body.include?("castanet")
+    assert last_response.body.include? "<body><div></div></body>"
   end
 end
