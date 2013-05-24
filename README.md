@@ -1,6 +1,6 @@
 # Rack::Nojs
 
-TODO: Write a gem description
+treat script tag in response.body when access with old mobile phone.
 
 ## Installation
 
@@ -18,7 +18,16 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Rails2
+
+Insert follow code into your config/environment.rb
+
+    require 'rack-nojs'
+    config.middleware.use ::Rack::Nojs
+
+### Rails3
+
+You don't need this gem :)
 
 ## Contributing
 
