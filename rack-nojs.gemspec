@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Rack::Nojs::VERSION
   spec.authors       = ["SHIBATA Hiroshi"]
   spec.email         = ["shibata.hiroshi@gmail.com"]
-  spec.description   = %q{}
-  spec.summary       = %q{}
-  spec.homepage      = ""
+  spec.description   = %q{treat script tag in response.body when access with old mobile phone.}
+  spec.summary       = %q{treat script tag in response.body when access with old mobile phone.}
+  spec.homepage      = "https://github.com/paperboy-30days/rack-nojs"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
